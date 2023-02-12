@@ -12,8 +12,8 @@
  *
 **/
 
-require_once(LOCAL_DIR . "/core/Security.php");
-require_once(LOCAL_DIR . "/core/boot.php");
+require_once(LOCAL_DIR . "/Framework/Security.php");
+require_once(LOCAL_DIR . "/Framework/Boot.php");
 
 class Router {
 	

@@ -18,24 +18,21 @@
  *
  */
 
-class boot {
+class Boot {
 	
 	protected $class;
+
+    const CORE_DIRECTORY = "Framework";
 	
 	public function __construct() {
-		
-		spl_autoload_register(array($this, "core"));
-				
+		spl_autoload_register(array($this, Boot::CORE_DIRECTORY));
 	}
 
-	public function core($class) {
-	
+	public function init($class) {
 		$this->class = $class;
-		if(file_exists(LOCAL_DIR . "/core/" . $this->class . ".php")) {
-			require_once(LOCAL_DIR . "/core/" . $this->class . ".php");
+		if(file_exists(LOCAL_DIR . "/" . Boot::CORE_DIRECTORY . "/" . $this->class . ".php")) {
+			require_once(LOCAL_DIR . "/" . Boot::CORE_DIRECTORY . "/" . $this->class . ".php");
 		}
-		
-	
 	}
 	
 	    

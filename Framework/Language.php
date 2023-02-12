@@ -53,7 +53,7 @@ class Language {
 		 * Core language
 		 */
 		
-		$path = LOCAL_DIR . "/core/lang/";
+		$path = LOCAL_DIR . "/Framework/lang/";
 		
 		switch ($this->defaultFile) {
 			case $this->defaultFile:
@@ -196,7 +196,7 @@ class Language {
 					$links .= "</li>";
 				//}
 				
-				$tpl = new ThemeLoader(LOCAL_DIR . "/core/html/lang_bar.html");
+				$tpl = new ThemeLoader(LOCAL_DIR . "/Framework/html/lang_bar.html");
 				$template = $tpl->renderPage($array = array('code' => $links));
 				
 			}

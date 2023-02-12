@@ -12,7 +12,7 @@
  *
 **/
 
-require_once(LOCAL_DIR . "/core/MsgBox.php");
+require_once(LOCAL_DIR . "/Framework/MsgBox.php");
 
 class ThemeLoader {
 	

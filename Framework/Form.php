@@ -206,10 +206,10 @@ class Form {
 		//$this->field = $field;
 
 		/**
-		 * Static UI files in core
+		 * Static UI files in Framework
 		 */
 		
-		$file = file_get_contents(LOCAL_DIR . "/core/html/form.html");
+		$file = file_get_contents(LOCAL_DIR . "/Framework/html/form.html");
 		$file = str_replace("{label}", $label, $file);
 		$file = str_replace("{field}", $field, $file);
 		//echo $file;

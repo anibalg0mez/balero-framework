@@ -98,7 +98,7 @@ class Blowfish {
 			*/
 			
 		
-			//require_once(LOCAL_DIR . "/core/ThemeLoader.php");
+			//require_once(LOCAL_DIR . "/Framework/ThemeLoader.php");
 			
 			try {
 

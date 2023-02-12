@@ -23,54 +23,6 @@ class XMLHandler {
     private $obj;
     private $node;
 
-    /**
-     * @return mixed|string
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * @param mixed|string $file
-     */
-    public function setFile($file)
-    {
-        $this->file = $file;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getObj()
-    {
-        return $this->obj;
-    }
-
-    /**
-     * @param mixed $obj
-     */
-    public function setObj($obj)
-    {
-        $this->obj = $obj;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNode()
-    {
-        return $this->node;
-    }
-
-    /**
-     * @param mixed $node
-     */
-    public function setNode($node)
-    {
-        $this->node = $node;
-    }
-
     public function __construct($file = "") {
         $this->file = $file;
         if (!file_exists($file)) {

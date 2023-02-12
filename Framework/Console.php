@@ -12,7 +12,7 @@
  *
 **/
 
-class MsgBox {
+class Console {
 	
 	/**
 	 * Added bootstrap boxes
@@ -32,7 +32,7 @@ class MsgBox {
 	
 	/**
 	 * 
-	 * Static file in '/core/html' folder
+	 * Static file in '/Framework/html' folder
 	 */
 	
 	private $file = "";
@@ -74,7 +74,7 @@ class MsgBox {
 		 * Loads Core UI Template
 		 */
 		
-		$this->file = LOCAL_DIR . "/core/html/msgbox.html";
+		$this->file = LOCAL_DIR . "/Framework/html/msgbox.html";
 		
 	}
 	

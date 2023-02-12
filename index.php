@@ -23,7 +23,7 @@ define("LOCAL_DIR", $dir); // Current dir
 define("APPS_DIR", LOCAL_DIR . "/site/apps/"); // App dir
 define("MODS_DIR", LOCAL_DIR . "/site/apps/admin/mods/"); // Mods dir
 
-require_once(LOCAL_DIR . "/core/Router.php"); // Load
+require_once(LOCAL_DIR . "/Framework/Router.php"); // Load
 
 $objRouter = new Router();
 $objRouter->init(); // Do magic
