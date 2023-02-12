@@ -45,7 +45,7 @@ class Uploader {
         return $this->getBasepath($path) . "/public/images/" . $filename;
     }
 
-    function isImage($ext) {
+    public function isImage($ext) {
         if(in_array($ext , array("gif" , "jpeg" , "png", "bpm")))  {
             return true;
         }
