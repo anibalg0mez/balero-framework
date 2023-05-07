@@ -18,7 +18,6 @@ error_reporting(-1); // Debug: Developer (-1) / User (0)
 
 define("_CORE_VERSION", "1.0");
 
-require_once("./Framework/Router.php");
+require_once("./Framework/Route/Router.php");
 
-$objRouter = new Framework\Router();
-$objRouter->init(); // Do magic
+$objRouter = new Framework\Route\Router();

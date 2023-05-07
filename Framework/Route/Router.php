@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework;
+namespace Framework\Route;
 
 /**
  *
@@ -13,12 +13,13 @@ namespace Framework;
  *
 **/
 
-require_once("./Framework/Loader.php");
+require_once("./Framework/Boot/Loader.php");
 
 class Router {
 
-	public function init() {
-        new \App\Test\TestController();
+	public function __construct() {
+        $run = new \App\Run();
+        $run->init();
 	}
 
 	public static function get($app_route, $app_callback)
@@ -53,7 +54,7 @@ class Router {
             $paramtrs = array_map(function ($paramtr) {
                 return $paramtr[0];
             }, $is_matched);
-            $call_back(new Request($paramtrs), new Response());
+            $call_back(new \Framework\Http\Request($paramtrs), new \Framework\Http\Response());
         }
     }
 	

@@ -1,20 +1,20 @@
-<?php namespace Framework;
+<?php
 
-class Request
-{
+namespace Framework\Http;
+
+class Request {
+
     public $paramtrs;
     public $req_method;
     public $content_type;
 
-    public function __construct($paramtrs = [])
-    {
+    public function __construct($paramtrs = []) {
         $this->paramtrs = $paramtrs;
         $this->req_method = trim($_SERVER['REQUEST_METHOD']);
         $this->content_type = !empty($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
     }
 
-    public function getBody()
-    {
+    public function getBody() {
         if ($this->req_method !== 'POST') {
             return '';
         }
@@ -27,8 +27,7 @@ class Request
         return $post_body;
     }
 
-    public function getJSON()
-    {
+    public function getJSON() {
         if ($this->req_method !== 'POST') {
             return [];
         }
@@ -43,4 +42,5 @@ class Request
 
         return $p_decoded;
     }
+    
 }

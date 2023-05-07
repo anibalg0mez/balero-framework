@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework;
+namespace Framework\MVC;
 
 /**
  *
@@ -11,14 +11,10 @@ namespace Framework;
  *
 **/
 
-class Controller  {
+class View  {
 
-   public function __construct() {
-      echo __NAMESPACE__;
-    }
-
-    public function home() {
-      echo __NAMESPACE__;
+    public function build($v) {
+      return $v; // TODO: Insert model dictionary and returns template builder}
     }
 
 }
