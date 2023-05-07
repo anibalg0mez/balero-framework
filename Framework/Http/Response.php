@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Class for intercep Http Response
+ */
+
 namespace Framework\Http;
 
 class Response {

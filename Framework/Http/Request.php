@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Class for intercep Http Request
+ */
+
 namespace Framework\Http;
 
 class Request {

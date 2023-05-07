@@ -2,6 +2,7 @@
 
 /**
  *
+ * Class for autoloading with namespaces
  * (c) May 11, 2023 lastprophet 
  * @author Anibal Gomez (lastprophet)
  * Balero CMS Open Source

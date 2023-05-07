@@ -4,7 +4,7 @@ namespace Framework\Route;
 
 /**
  *
- * Router.php
+ * Router.php: A class for routing http methods, ex: posts/1
  * (c) Feb 26, 2023 lastprophet 
  * @author Anibal Gomez (lastprophet)
  * Balero CMS Open Source
@@ -18,12 +18,10 @@ require_once("./Framework/Boot/Loader.php");
 class Router {
 
 	public function __construct() {
-        $run = new \App\Run();
-        $run->init();
+        $run = new \Framework\Boot\Run();
 	}
 
-	public static function get($app_route, $app_callback)
-    {
+	public static function get($app_route, $app_callback) {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'GET') !== 0) {
             return;
         }
@@ -31,8 +29,7 @@ class Router {
         self::on($app_route, $app_callback);
     }
 
-    public static function post($app_route, $app_callback)
-    {
+    public static function post($app_route, $app_callback) {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0) {
             return;
         }
@@ -40,8 +37,7 @@ class Router {
         self::on($app_route, $app_callback);
     }
 
-    public static function on($exprr, $call_back)
-    {
+    public static function on($exprr, $call_back) {
         $paramtrs = $_SERVER['REQUEST_URI'];
         $paramtrs = (stripos($paramtrs, "/") !== 0) ? "/" . $paramtrs : $paramtrs;
         $exprr = str_replace('/', '\/', $exprr);
