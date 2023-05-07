@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Balero Framework Example App
+ */
+
 namespace App\Test;
 
 class TestController extends \Framework\MVC\Controller {

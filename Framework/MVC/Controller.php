@@ -13,9 +13,9 @@ namespace Framework\MVC;
 
 class Controller  {
 
-    public function render($v) {
-      $view = new \Framework\MVC\View($v);
-      echo $view->build($v);
+    public function render($model) {
+      $view = new \Framework\MVC\View($model);
+      echo $view->build($model);
     }
 
 

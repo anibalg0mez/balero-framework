@@ -14,7 +14,11 @@ namespace Framework\MVC;
 class View  {
 
     public function build($v) {
-      return $v; // TODO: Insert model dictionary and returns template builder}
+      return $this->templateBuilder($v); // TODO: Iterate model dictionary and returns template builder}
+    }
+
+    public function templateBuilder($v) {
+      return "<b>" . $v . "<b>"; // TODO: Reads template file and return as string
     }
 
 }
