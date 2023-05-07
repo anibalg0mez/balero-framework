@@ -12,19 +12,13 @@
 **/
 
 error_reporting(-1); // Debug: Developer (-1) / User (0)
-define("_CORE_VERSION", "0.9"); // Version
 
 // DO NOT EDIT
-// -----------
-$dir = dirname(__FILE__); // Windows Servers
-$dir = str_replace("\\", "/", $dir);
+// ----------------------------
 
-define("LOCAL_DIR", $dir); // Current dir
-define("APPS_DIR", LOCAL_DIR . "/site/apps/"); // App dir
-define("MODS_DIR", LOCAL_DIR . "/site/apps/admin/mods/"); // Mods dir
+define("_CORE_VERSION", "1.0");
 
-require_once(LOCAL_DIR . "/Framework/Router.php"); // Load
+require_once("./Framework/Router.php");
 
-$objRouter = new Router();
+$objRouter = new Framework\Router();
 $objRouter->init(); // Do magic
-// -----------

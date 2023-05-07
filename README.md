@@ -26,6 +26,14 @@ SETUP
     $ cd balero-framework
     $ docker-compose up
 
+RUN
+=====
+
+http://localhost:8002/
+
+CONTACT
+=============
+
 Friendly contact:
 
 balerocms@gmail.com
