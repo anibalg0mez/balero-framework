@@ -5,8 +5,11 @@ Balero Framework is a lightweight PHP framework free and open source software, i
 
 ==========
 
-DOWNLOAD DOCKER
-===============
+HOW TO SETUP/INSTALL
+====================
+
+1. DOWNLOAD DOCKER
+===================
 
 https://www.docker.com/products/docker-desktop/
 
@@ -14,20 +17,29 @@ https://www.docker.com/products/docker-desktop/
     If the output shows the release downloaded in Step 3, you have successfully installed the package.
 
 
-DOWNLOAD FRAMEWORK
-==================
+2. DOWNLOAD FRAMEWORK
+=====================
 
+    With Git:
     $ git clone git@github.com:anibalg0mez/balero-framework.git
     $ git checkout development
 
-SETUP
-=====
+    Or
+
+    With console:
+    $ curl https://github.com/anibalg0mez/balero-framework/archive/refs/heads/development.zip -L -o balero-framework.zip
+    $ unzip balero-framework.zip
+
+INSTALL FRAMEWORK
+==================
+
+First install LAMP enviroment througth docker and install dependencies:
 
     $ cd balero-framework
     $ docker-compose up
 
-RUN
-=====
+RUN BALERO
+==========
 
 http://localhost:8002/
 
