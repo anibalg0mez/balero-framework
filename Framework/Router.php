@@ -1,7 +1,5 @@
 <?php
 
-namespace Framework\Route;
-
 /**
  *
  * Router.php: A class for routing http methods, ex: posts/1
@@ -13,12 +11,17 @@ namespace Framework\Route;
  *
 **/
 
-require_once("./Framework/Boot/Loader.php");
+require_once("./Framework/Loader.php");
+//require_once("./Framework/Route/RouterRegister.php");
+//require_once("./App/Test/TestController.php");
 
-class Router {
+class Router extends RouterRegister {
 
 	public function __construct() {
-        $run = new \Framework\Boot\Run();
+
+        $this->init();
+        $app = new TestController();
+
 	}
 
 	public static function get($app_route, $app_callback) {
@@ -50,8 +53,9 @@ class Router {
             $paramtrs = array_map(function ($paramtr) {
                 return $paramtr[0];
             }, $is_matched);
-            $call_back(new \Framework\Http\Request($paramtrs), new \Framework\Http\Response());
+            $call_back(new Request($paramtrs), new Response());
         }
     }
-	
+
+    	
 }

@@ -1,20 +1,16 @@
 <?php
 
-/**
- * Balero Framework Example App
- */
+/** example app */
+class TestController {
 
-namespace App\Test;
-
-use \Framework\Route\Router as Router;
-use \Framework\MVC\Controller as Controller;
-
-class TestController extends Controller {
-
-    public function __construct() {
-        Router::get('/', function () {
-            return $this->render("Hello World!");
-        });
+    #[Get("/")]
+    public function home($nombre) {
+      echo "Hola, $nombre!";
+    }
+  
+    #[Get("/blog")]
+    public function blog($nombre) {
+      echo "Adiós, $nombre!";
     }
 
 }

@@ -4,8 +4,6 @@
  * Class for intercep Http Response
  */
 
-namespace Framework\Http;
-
 class Response {
     
     private $p_status = 200;
