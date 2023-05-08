@@ -6,10 +6,12 @@
 
 namespace App\Test;
 
+use \Framework\Route\Router as Router;
+
 class TestController extends \Framework\MVC\Controller {
 
     public function __construct() {
-        \Framework\Route\Router::get('/', function () {
+        Router::get('/', function () {
             return $this->render("Hello World!");
         });
     }
