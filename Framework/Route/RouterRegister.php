@@ -26,7 +26,6 @@ class RouterRegister
          */
         public function deployGetMethods()
         {
-
                 $class = new ReflectionClass(TestController::class);
                 $methods = $class->getMethods();
                 foreach ($methods as $method) {
@@ -42,21 +41,6 @@ class RouterRegister
                                 });
                         }
                 }
-
-                /**
-                require_once('./App/Test/TestController.php');
-                $class = new ReflectionClass(TestController::class);
-                $methods = $class->getMethods();
-                foreach ($methods as $method) {
-                "$classMethod = $class->getMethod($method->getName());"
-                $classAttributes = $classMethod->getAttributes(Get::class)[0]->newInstance();
-                $this->path = $classAttributes->getPath();
-                Router::get($this->path, function () {
-                echo "view::" . $this->path . "<br>"; // TODO: Render or add view functionality
-                });
-                }
-                **/
-
         }
 
 }
