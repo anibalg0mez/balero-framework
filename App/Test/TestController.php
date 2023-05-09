@@ -4,13 +4,18 @@
 class TestController {
 
     #[Get("/")]
-    public function home($nombre) {
-      echo "Hola, $nombre!";
+    public function index($nombre) {
+      echo "Index, $nombre!";
     }
   
+    #[Get("/home")]
+    public function home($nombre) {
+      echo "Home, $nombre!";
+    }
+
     #[Get("/blog")]
     public function blog($nombre) {
-      echo "Adiós, $nombre!";
+      echo "Blog, $nombre!";
     }
 
 }

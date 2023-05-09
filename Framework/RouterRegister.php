@@ -9,45 +9,33 @@
  * Proyecto %100 mexicano bajo la licencia GNU.
  * PHP P.O.O. (M.V.C.)
  *
-**/
+ **/
 
 
-class RouterRegister {
+class RouterRegister
+{
+        /**
+         * Contains the path of the Request Method (ex: /home)
+         */
+        private $path;
 
-	public function init() {
+        /**
+         * It deploys all the GET Request Methods of the controllers
+         */
+        public function deployGetMethods()
+        {
+                require_once('./App/Test/TestController.php');
+                $class = new ReflectionClass(TestController::class);
+                $methods = $class->getMethods();
+                foreach ($methods as $method) {
+                        $classMethod = $class->getMethod($method->getName());
+                        $classAttributes = $classMethod->getAttributes(Get::class)[0]->newInstance();
+                        $this->path = $classAttributes->getPath();
+                        Router::get($this->path, function () {
+                                echo "view::" . $this->path . "<br>"; // TODO: Render or add view functionality
+                        });
+                }
 
-        //require_once("./Framework/Attribute/Get.php");
+        }
 
-        // TODO: Make it dinamically
-        require_once('./App/Test/TestController.php');
-
-        $class = new ReflectionClass(TestController::class);
-
-        $homeMethod = $class->getMethod("home");
-        $attrHome = $homeMethod->getAttributes(Get::class)[0]->newInstance();
-
-        $blogMethod = $class->getMethod("blog");
-        $attrBlog = $blogMethod->getAttributes(Get::class)[0]->newInstance();
-
-        // imprimir los valores de los atributos personalizados
-        //echo "Method GET: " . $atributoSaludar->getPath() . "<br>";
-        //echo "Method GET: " . $atributoDespedir->getPath();
-
-        //Router::get('/', function () {
-                //echo "Home!";
-        //});
-
-        // TODO: Iteare and deploy all methods
-        /** deploy endpoint */
-        Router::get($attrHome->getPath(), function () {
-                echo "Home!";
-        });
-    
-        Router::get('/blog', function () {
-                echo "Blog!";
-        });
-    
-
-	}
-    	
 }

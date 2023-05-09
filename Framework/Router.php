@@ -19,7 +19,7 @@ class Router extends RouterRegister {
 
 	public function __construct() {
 
-        $this->init();
+        $this->deployGetMethods();
         $app = new TestController();
 
 	}
