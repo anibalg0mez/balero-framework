@@ -37,9 +37,14 @@ class RouterRegister {
                 //echo "Home!";
         //});
 
+        // TODO: Iteare and deploy all methods
         /** deploy endpoint */
         Router::get($attrHome->getPath(), function () {
                 echo "Home!";
+        });
+    
+        Router::get('/blog', function () {
+                echo "Blog!";
         });
     
 
