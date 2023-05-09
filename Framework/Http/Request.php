@@ -1,8 +1,14 @@
 <?php
 
+namespace Framework\Http;
+
 /**
- * Class for intercep Http Request
- */
+ *
+ * @author Anibal Gomez (lastprophet)
+ * Balero Framework Open Source
+ * Proyecto %100 mexicano bajo la licencia GNU.
+ *
+**/
 
 class Request {
 

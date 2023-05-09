@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Test;
+
 /** example app */
 class TestController {
 

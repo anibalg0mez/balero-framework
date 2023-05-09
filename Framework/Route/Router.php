@@ -1,19 +1,18 @@
 <?php
 
+namespace Framework\Route;
+
 /**
  *
- * Router.php: A class for routing http methods, ex: posts/1
- * (c) Feb 26, 2023 lastprophet 
  * @author Anibal Gomez (lastprophet)
- * Balero CMS Open Source
+ * Balero Framework Open Source
  * Proyecto %100 mexicano bajo la licencia GNU.
- * PHP P.O.O. (M.V.C.)
  *
 **/
 
-require_once("./Framework/Loader.php");
-//require_once("./Framework/Route/RouterRegister.php");
-//require_once("./App/Test/TestController.php");
+use  App\Test\TestController;
+use Framework\Http\Request;
+use Framework\Http\Response;
 
 class Router extends RouterRegister {
 
