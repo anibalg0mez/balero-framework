@@ -6,18 +6,21 @@
  * Balero Framework Open Source
  * Proyecto %100 mexicano bajo la licencia GNU.
  *
-**/
+ **/
 
 namespace Framework\Attribute;
 
 #[Attribute]
-class Get {
+class Get
+{
 
-  public function __construct($path) {
+  public function __construct($path)
+  {
     $this->path = $path;
   }
 
-  public function getPath() {
+  public function getPath()
+  {
     return $this->path;
   }
 

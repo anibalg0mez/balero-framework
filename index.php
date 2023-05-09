@@ -6,7 +6,7 @@
  * Balero Framework Open Source
  * Proyecto %100 mexicano bajo la licencia GNU.
  *
-**/
+ **/
 
 error_reporting(-1); // Debug: Developer (-1) / User (0)
 

@@ -8,22 +8,25 @@ namespace Framework\Route;
  * Balero Framework Open Source
  * Proyecto %100 mexicano bajo la licencia GNU.
  *
-**/
+ **/
 
-use  App\Test\TestController;
+use App\Test\TestController;
 use Framework\Http\Request;
 use Framework\Http\Response;
 
-class Router extends RouterRegister {
+class Router extends RouterRegister
+{
 
-	public function __construct() {
+    public function __construct()
+    {
 
         $this->deployGetMethods();
         $app = new TestController();
 
-	}
+    }
 
-	public static function get($app_route, $app_callback) {
+    public static function get($app_route, $app_callback)
+    {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'GET') !== 0) {
             return;
         }
@@ -31,7 +34,8 @@ class Router extends RouterRegister {
         self::on($app_route, $app_callback);
     }
 
-    public static function post($app_route, $app_callback) {
+    public static function post($app_route, $app_callback)
+    {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0) {
             return;
         }
@@ -39,7 +43,8 @@ class Router extends RouterRegister {
         self::on($app_route, $app_callback);
     }
 
-    public static function on($exprr, $call_back) {
+    public static function on($exprr, $call_back)
+    {
         $paramtrs = $_SERVER['REQUEST_URI'];
         $paramtrs = (stripos($paramtrs, "/") !== 0) ? "/" . $paramtrs : $paramtrs;
         $exprr = str_replace('/', '\/', $exprr);
@@ -56,5 +61,5 @@ class Router extends RouterRegister {
         }
     }
 
-    	
+
 }
