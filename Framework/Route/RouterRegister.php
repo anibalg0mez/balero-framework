@@ -10,9 +10,6 @@ namespace Framework\Route;
  *
  **/
 
-use ReflectionMethod;
-use ReflectionClass;
-
 use Framework\Reader\ClassReader;
 
 class RouterRegister
@@ -30,26 +27,21 @@ class RouterRegister
      */
     public function deployMethods($appClass)
     {
-        $class = new ReflectionClass($appClass);
-        $methods = $class->getMethods();
+
+        $cr = new ClassReader();
+        $methods = $cr->getMethods($appClass);
         foreach ($methods as $method) {
-            $classMethods = $class->getMethod($method->getName());
-            $reflection = new ReflectionMethod(
-                $appClass,
-                $classMethods->getName()
-            );
-            $methodAttributes = $reflection->getAttributes();
-            // TODO: Integrate and process parameters on the attribute
-            //var_dump($reflection->getParameters());
-            foreach ($methodAttributes as $attribute) {
-                $this->path = $attribute->getArguments()[0];
+            $props = $cr->getMethodProperties($appClass, $method);
+            $atrs = $props->getAttributes();
+            foreach ($atrs as $att) {
+                $this->path = $att->getArguments()[0];
                 $this->createGetEndpoints(
-                    $attribute->getName(),
+                    $att->getName(),
                     self::GET,
                     $this->path
                 );
                 $this->createPostEndpoints(
-                    $attribute->getName(),
+                    $att->getName(),
                     self::POST,
                     $this->path
                 );

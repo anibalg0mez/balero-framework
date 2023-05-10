@@ -10,50 +10,32 @@ namespace Framework\Reader;
  *
  **/
 
-use ReflectionMethod;
 use ReflectionClass;
+use ReflectionMethod;
 
 class ClassReader
 {
-    private $class;
 
     /**
      * It return the method names of a class
      */
 
-    public function getMethods($class)
+    public function getMethods($clazz)
     {
-        $this->class = new ReflectionClass($class);
-        return $this->class->getMethods();
+        $class = new ReflectionClass($clazz);
+        return $class->getMethods();
     }
 
-    /**
-     * It returns all properties ( attributes, parameters, etc... ) of given method
-     */
 
-    public function getMethodProperties($methodName)
+    public function getMethodProperties($clazz, $methodName)
     {
-        $properties = $this->class->getMethod($methodName->getName());
-        return new ReflectionMethod($this->class, $properties->getName());
+        $class = new ReflectionClass($clazz);
+        $classMethods = $class->getMethod($methodName->getName());
+        $reflection = new ReflectionMethod(
+            $clazz,
+            $classMethods->getName()
+        );
+        return $reflection;
     }
 
-    /**
-     * It returns attributes of given method
-     */
-
-    public function getMethodAttributes($methodName)
-    {
-        $methodProperties = $this->getMethodProperties($methodName);
-        return $methodProperties->getAttributes();
-    }
-
-    /**
-     * It returns arguments of given method
-     */
-
-    public function getMethodParameters($methodName)
-    {
-        $methodProperties = $this->getMethodProperties($methodName);
-        return $methodProperties->getParameters();
-    }
 }
