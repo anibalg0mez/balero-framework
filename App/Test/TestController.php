@@ -24,4 +24,10 @@ class TestController
     echo "Blog, $nombre!";
   }
 
+  #[Post("/health")]
+  public function health()
+  {
+    echo "Up!";
+  }
+
 }

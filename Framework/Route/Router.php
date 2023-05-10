@@ -17,12 +17,12 @@ use Framework\Http\Response;
 class Router extends RouterRegister
 {
 
+    /**
+     * Deploy all HTTP Request Methods
+     */
     public function __construct()
     {
-
-        $this->deployGetMethods();
-        $app = new TestController();
-
+        $this->deployMethods(TestController::class);
     }
 
     public static function get($app_route, $app_callback)
