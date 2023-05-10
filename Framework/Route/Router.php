@@ -16,7 +16,6 @@ use Framework\Http\Response;
 
 class Router extends RouterRegister
 {
-
     /**
      * Deploy all HTTP Request Methods
      */
@@ -27,7 +26,7 @@ class Router extends RouterRegister
 
     public static function get($app_route, $app_callback)
     {
-        if (strcasecmp($_SERVER['REQUEST_METHOD'], 'GET') !== 0) {
+        if (strcasecmp($_SERVER["REQUEST_METHOD"], "GET") !== 0) {
             return;
         }
 
@@ -36,7 +35,7 @@ class Router extends RouterRegister
 
     public static function post($app_route, $app_callback)
     {
-        if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0) {
+        if (strcasecmp($_SERVER["REQUEST_METHOD"], "POST") !== 0) {
             return;
         }
 
@@ -45,10 +44,15 @@ class Router extends RouterRegister
 
     public static function on($exprr, $call_back)
     {
-        $paramtrs = $_SERVER['REQUEST_URI'];
-        $paramtrs = (stripos($paramtrs, "/") !== 0) ? "/" . $paramtrs : $paramtrs;
-        $exprr = str_replace('/', '\/', $exprr);
-        $matched = preg_match('/^' . ($exprr) . '$/', $paramtrs, $is_matched, PREG_OFFSET_CAPTURE);
+        $paramtrs = $_SERVER["REQUEST_URI"];
+        $paramtrs = stripos($paramtrs, "/") !== 0 ? "/" . $paramtrs : $paramtrs;
+        $exprr = str_replace("/", "\/", $exprr);
+        $matched = preg_match(
+            "/^" . $exprr . '$/',
+            $paramtrs,
+            $is_matched,
+            PREG_OFFSET_CAPTURE
+        );
 
         if ($matched) {
             // first value is normally the route, lets remove it
@@ -60,6 +64,4 @@ class Router extends RouterRegister
             $call_back(new Request($paramtrs), new Response());
         }
     }
-
-
 }

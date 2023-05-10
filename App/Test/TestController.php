@@ -5,29 +5,26 @@ namespace App\Test;
 /** example app */
 class TestController
 {
+    #[Get("/")]
+    public function index($nombre)
+    {
+    }
 
-  #[Get("/")]
-  public function index($nombre)
-  {
-    echo "Index, $nombre!";
-  }
+    #[Get("/home")]
+    public function home($nombre)
+    {
+        echo "Home, $nombre!";
+    }
 
-  #[Get("/home")]
-  public function home($nombre)
-  {
-    echo "Home, $nombre!";
-  }
+    #[Get("/blog")]
+    public function blog($nombre)
+    {
+        echo "Blog, $nombre!";
+    }
 
-  #[Get("/blog")]
-  public function blog($nombre)
-  {
-    echo "Blog, $nombre!";
-  }
-
-  #[Post("/health")]
-  public function health()
-  {
-    echo "Up!";
-  }
-
+    #[Post("/health")]
+    public function health()
+    {
+        echo "Up!";
+    }
 }
