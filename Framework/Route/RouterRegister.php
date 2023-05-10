@@ -29,9 +29,10 @@ class RouterRegister
     {
 
         $cr = new ClassReader();
-        $methods = $cr->getMethods($appClass);
+        $cr->init($appClass);
+        $methods = $cr->getMethods();
         foreach ($methods as $method) {
-            $props = $cr->getMethodProperties($appClass, $method);
+            $props = $cr->getMethodProperties($method);
             $atrs = $props->getAttributes();
             foreach ($atrs as $att) {
                 $this->path = $att->getArguments()[0];

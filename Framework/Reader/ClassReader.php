@@ -13,29 +13,72 @@ namespace Framework\Reader;
 use ReflectionClass;
 use ReflectionMethod;
 
+/**
+ * Class ClassReader for reflection
+ * returns the class properties
+ * @package Framework\Reader
+ */
 class ClassReader
 {
 
     /**
-     * It return the method names of a class
+     * @var parameter class instance
      */
+    private $clazz;
 
-    public function getMethods($clazz)
+    /**
+     * @var the class name Class:class
+     */
+    private $clazzName;
+
+    /**
+     * @param $clazz ClassName:class
+     * @throws \ReflectionException
+     */
+    public function init($clazz)
     {
-        $class = new ReflectionClass($clazz);
-        return $class->getMethods();
+        $this->clazz = new ReflectionClass($clazz);
+        $this->setClazzName($clazz);
+    }
+
+    /**
+     * @return array list of methos of the given class name
+     */
+    public function getMethods()
+    {
+        return $this->clazz->getMethods();
     }
 
 
-    public function getMethodProperties($clazz, $methodName)
+    /**
+     * @param $methodName string method name
+     * @return ReflectionMethod method properties as array
+     * @throws \ReflectionException
+     */
+    public function getMethodProperties($methodName)
     {
-        $class = new ReflectionClass($clazz);
-        $classMethods = $class->getMethod($methodName->getName());
+        $classMethods = $this->clazz->getMethod($methodName->getName());
         $reflection = new ReflectionMethod(
-            $clazz,
+            $this->getClazzName(),
             $classMethods->getName()
         );
         return $reflection;
+    }
+
+    /**
+     * @return mixed ClassName:class
+     */
+    public function getClazzName()
+    {
+        return $this->clazzName;
+    }
+
+    /**
+     * @param mixed set $clazzName
+     */
+    public function setClazzName($clazzName): void
+    {
+        $this->clazzName = $clazzName;
     }
 
 }
