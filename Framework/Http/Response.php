@@ -20,6 +20,13 @@ class Response
         return $this;
     }
 
+    public function toView($data)
+    {
+        http_response_code($this->p_status);
+        header("Content-Type: text/html");
+        echo $data;
+    }
+
     public function toJSON($data = [])
     {
         http_response_code($this->p_status);

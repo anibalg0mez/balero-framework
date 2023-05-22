@@ -11,6 +11,8 @@ namespace Framework\Route;
  **/
 
 use Framework\Reader\ClassReader;
+use Framework\Http\Request;
+use Framework\Http\Response;
 
 class RouterRegister
 {
@@ -18,28 +20,48 @@ class RouterRegister
     private const POST = "Post";
 
     /**
+     * @var class name invoke class:class
+     */
+    private $appClass;
+
+    /**
+     * @var current method name on iteration to dinamically instance it
+     */
+    private $currentMethod;
+
+    /**
      * URL path
      */
     private $path;
+
+    /**
+     * @var string view from the controller method
+     */
+    private $view;
 
     /**
      * It deploys all the GET Request Methods of the controllers
      */
     public function deployMethods($appClass)
     {
-
+        $this->appClass = $appClass;
         $cr = new ClassReader();
         $cr->init($appClass);
         $methods = $cr->getMethods();
         foreach ($methods as $method) {
+            $this->currentMethod = $method->getName();
             $props = $cr->getMethodProperties($method);
             $atrs = $props->getAttributes();
             foreach ($atrs as $att) {
+                // TODO: Count the "GET" attributess and proccess it dinamically
                 $this->path = $att->getArguments()[0];
+                $this->view = count($att->getArguments()) === 2 ? $att->getArguments()[1] : "";
                 $this->createGetEndpoints(
                     $att->getName(),
                     self::GET,
-                    $this->path
+                    $this->path,
+                    $this->view,
+                    $this->currentMethod
                 );
                 $this->createPostEndpoints(
                     $att->getName(),
@@ -52,14 +74,19 @@ class RouterRegister
 
     /**
      * Validate and create HTTP GET Request Method
+     * Dinamically call the current method name on iteration
      */
-    private function createGetEndpoints($methodName, $req, $path)
+    private function createGetEndpoints($methodName, $req, $path, $view, $currentMethod)
     {
         $this->path = $path;
+        $this->view = $view;
+        $this->currentMethod = $currentMethod;
         if (str_contains($methodName, $req)) {
-            // TODO: Render or add view functionality
-            Router::get($this->path, function () {
-                echo "view::" . $this->path . "<br>";
+            Router::get($this->path, function (Request $request, Response $response) {
+                // invoke an instance method
+                $instance = new $this->appClass();
+                $instanceMethod = $this->currentMethod;
+                $response->toView($this->view  ." " .  $instance->$instanceMethod());
             });
         }
     }
