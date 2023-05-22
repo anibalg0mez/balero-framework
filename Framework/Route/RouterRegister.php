@@ -13,8 +13,9 @@ namespace Framework\Route;
 use Framework\Reader\ClassReader;
 use Framework\Http\Request;
 use Framework\Http\Response;
+use Framework\Web\Controller;
 
-class RouterRegister
+class RouterRegister extends Controller
 {
     private const GET = "Get";
     private const POST = "Post";
@@ -33,11 +34,6 @@ class RouterRegister
      * URL path
      */
     private $path;
-
-    /**
-     * @var string view from the controller method
-     */
-    private $view;
 
     /**
      * It deploys all the GET Request Methods of the controllers
@@ -86,7 +82,12 @@ class RouterRegister
                 // invoke an instance method
                 $instance = new $this->appClass();
                 $instanceMethod = $this->currentMethod;
-                $response->toView($this->view  ." " .  $instance->$instanceMethod());
+                $response->toView(
+                    $this->render(
+                        $instance->$instanceMethod(),
+                        $this->view
+                    )
+                );
             });
         }
     }

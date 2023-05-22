@@ -7,7 +7,7 @@ use Framework\Web\Controller;
 use Framework\Web\Model;
 
 /** example app */
-class TestController extends Controller
+class TestController
 {
     #[Get("/", "testview.html")]
     public function index()
@@ -19,7 +19,7 @@ class TestController extends Controller
         //Controller::$model = new Model($items);
         //echo $this->render($items, "../templates/index.html");
         //echo $this->render();
-        return $this->render("models"); // render models on view
+        return "models"; // render models on view
     }
 
     #[Get("/home")]
