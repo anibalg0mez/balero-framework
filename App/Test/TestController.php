@@ -2,24 +2,17 @@
 
 namespace App\Test;
 
-
-use Framework\Web\Controller;
-use Framework\Web\Model;
-
 /** example app */
 class TestController
 {
-    #[Get("/", "testview.html")]
+    #[Get("/", "templates/index.html")]
     public function index()
     {
-        $items = [
+        $model = [
             'name' => 'John',
             'email' => 'john@gmail.com'
         ];
-        //Controller::$model = new Model($items);
-        //echo $this->render($items, "../templates/index.html");
-        //echo $this->render();
-        return "models"; // render models on view
+        return $model;
     }
 
     #[Get("/home")]

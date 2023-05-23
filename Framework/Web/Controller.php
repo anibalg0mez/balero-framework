@@ -1,5 +1,7 @@
 <?php
 
+namespace Framework\Web;
+
 /**
  *
  * @author Anibal Gomez (lastprophet)
@@ -7,22 +9,30 @@
  * Proyecto %100 mexicano bajo la licencia GNU.
  *
  **/
-
-namespace Framework\Web;
-
 class Controller extends TemplateImpl {
 
     public $view;
     public $model;
 
+    /**
+     * It renders the model and view contents
+     * @param $model
+     * @param $view
+     * @return array|mixed|string|string[]
+     */
     public function render($model, $view, ) {
-        //$this->view = $view;
-        //$this->replaceItems($items, $this->getHtmlContents($view));
-        return $view . " <b>" . $model . "</b>";
+        $this->view = $view;
+        return $this->replaceItems($model, $this->getTemplateContents($view));
     }
 
-    public function getHtmlContents($htmlFile) {
-        return file_get_contents($htmlFile);
+    /**
+     * Returns the html content file
+     * @param $htmlFile
+     * @return false|string
+     */
+    public function getTemplateContents($htmlFile) {
+        $dir = realpath($_SERVER["DOCUMENT_ROOT"]) . "/App/"; // TODO: Add to constants file
+        return file_get_contents($dir . $htmlFile);
     }
 
 
