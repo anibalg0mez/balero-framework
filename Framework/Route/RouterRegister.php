@@ -51,13 +51,10 @@ class RouterRegister extends Controller
             foreach ($atrs as $att) {
                 // TODO: Count the "GET" attributess and proccess it dinamically
                 $this->path = $att->getArguments()[0];
-                $this->view = count($att->getArguments()) === 2 ? $att->getArguments()[1] : "";
+                $this->setView(count($att->getArguments()) === 2 ? $att->getArguments()[1] : "");
                 $this->createGetEndpoints(
                     $att->getName(),
-                    self::GET,
-                    $this->path,
-                    $this->view,
-                    $this->currentMethod
+                    self::GET
                 );
                 $this->createPostEndpoints(
                     $att->getName(),
@@ -72,11 +69,8 @@ class RouterRegister extends Controller
      * Validate and create HTTP GET Request Method
      * Dinamically call the current method name on iteration
      */
-    private function createGetEndpoints($methodName, $req, $path, $view, $currentMethod)
+    private function createGetEndpoints($methodName, $req)
     {
-        $this->path = $path;
-        $this->view = $view;
-        $this->currentMethod = $currentMethod;
         if (str_contains($methodName, $req)) {
             Router::get($this->path, function (Request $request, Response $response) {
                 // invoke an instance method
@@ -85,7 +79,7 @@ class RouterRegister extends Controller
                 $response->toView(
                     $this->render(
                         $instance->$instanceMethod(),
-                        $this->view
+                        $this->getView()
                     )
                 );
             });

@@ -11,8 +11,8 @@ namespace Framework\Web;
  **/
 class Controller extends TemplateImpl {
 
-    public $view;
-    public $model;
+    private $view;
+    private $model;
 
     /**
      * It renders the model and view contents
@@ -35,5 +35,36 @@ class Controller extends TemplateImpl {
         return file_get_contents($dir . $htmlFile);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getView()
+    {
+        return $this->view;
+    }
+
+    /**
+     * @param mixed $view
+     */
+    public function setView($view): void
+    {
+        $this->view = $view;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    /**
+     * @param mixed $model
+     */
+    public function setModel($model): void
+    {
+        $this->model = $model;
+    }
 
 }
