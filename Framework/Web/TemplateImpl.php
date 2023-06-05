@@ -21,7 +21,7 @@ class TemplateImpl implements Template
     {
         // TODO: Implement render() method.
         // https://stackoverflow.com/questions/51947388/replace-with-dynamic-variable-in-preg-replace
-        return str_replace(array_map(function ($v) {return "[[{$v}]]";}, array_keys($items)), $items, $string);
+        return str_replace(array_map(function ($v) {return "{{{$v}}}";}, array_keys($items)), $items, $string);
     }
 
     public function loadModel(Model $model)

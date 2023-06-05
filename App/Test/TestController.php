@@ -9,8 +9,9 @@ class TestController
     public function index()
     {
         $model = [
-            'name' => 'John',
-            'email' => 'john@gmail.com'
+            'app' => 'Balero',
+            'message' => 'there',
+            'sample' => 'sample app'
         ];
         return $model;
     }
