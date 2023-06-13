@@ -1,3 +1,10 @@
 body {
-    background: bisque;
+    background: #f9fcf7;
+    margin: 10px;
+}
+.header {
+    background-color: #b6e026;
+}
+.content {
+    background-color: #EAEAEA;
 }

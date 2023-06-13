@@ -9,7 +9,7 @@ class TestController
     public function index()
     {
         $model = [
-            'app' => 'Balero',
+            'app' => 'Balero Framework',
             'message' => 'there',
             'sample' => 'sample app'
         ];
