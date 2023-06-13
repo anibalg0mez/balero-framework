@@ -10,9 +10,9 @@ namespace Framework\Route;
  *
  **/
 
-use App\Test\TestController;
 use Framework\Http\Request;
 use Framework\Http\Response;
+use Framework\Reader\DirectoryReader;
 
 class Router extends RouterRegister
 {
@@ -21,7 +21,12 @@ class Router extends RouterRegister
      */
     public function __construct()
     {
-        $this->deployMethods(TestController::class);
+        $dr = new DirectoryReader();
+        $controllers = $dr->listAllFiles();
+        foreach ($controllers as $c) {
+            $controller = "\App\Test\\" . $c; // TODO: Read "Test" folder dinamically
+            $this->deployMethods(new $controller); // TODO: Test with multiple controllers
+        }
     }
 
     public static function get($app_route, $app_callback)
