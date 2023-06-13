@@ -2,6 +2,8 @@
 
 namespace Framework\Reader;
 
+use Framework\Util\Balero;
+
 /**
  * Generic class to read files from directory
  * @package Framework\Reader
@@ -10,15 +12,16 @@ class DirectoryReader
 {
 
     /**
+     * It ignores "." and ".." register
      * @return array of directories
      */
     public function listAllFiles(): array
     {
-        $dir = $_SERVER["DOCUMENT_ROOT"] . "/App/Test"; // TODO: Add to constants file
+        $dir = Balero::getControllersRoot();
         $items = array();
         foreach (scandir($dir) as $item) {
-            if (!($item == '.')) {
-                if (!($item == '..')) {
+            if (!($item == Balero::CURRENT_FOLDER)) {
+                if (!($item == Balero::PREVIOUS_FOLDER)) {
                     array_push($items, $this->removeExt($item));
                 }
             }

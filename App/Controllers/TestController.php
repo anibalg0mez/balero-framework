@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Test;
+namespace App\Controllers;
 
 /** example app */
 class TestController
 {
-    #[Get("/", "templates/index.html")]
+    #[Get("/", "Templates/index.html")]
     public function index()
     {
         $model = [

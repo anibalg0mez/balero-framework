@@ -13,18 +13,20 @@ namespace Framework\Route;
 use Framework\Http\Request;
 use Framework\Http\Response;
 use Framework\Reader\DirectoryReader;
+use Framework\Util\Balero;
 
 class Router extends RouterRegister
 {
     /**
-     * Deploy all HTTP Request Methods
+     * Reads controllers folder and instance it each one
+     * ex: $controller = new App\Controllers\$Controller
      */
     public function __construct()
     {
         $dr = new DirectoryReader();
         $controllers = $dr->listAllFiles();
         foreach ($controllers as $c) {
-            $controller = "\App\Test\\" . $c; // TODO: Read "Test" folder dinamically
+            $controller = Balero::getControllersInstance() . $c;
             $this->deployMethods(new $controller); // TODO: Test with multiple controllers
         }
     }
