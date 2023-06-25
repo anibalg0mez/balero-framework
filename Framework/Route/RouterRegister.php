@@ -17,6 +17,17 @@ use Framework\Web\Controller;
 
 class RouterRegister extends Controller
 {
+
+    /**
+     * Swts default path if not set
+     */
+    private const DEFAULT_PATH = "/";
+
+    /**
+     * Swts default view if not set
+     */
+    private const DEFAULT_VIEW = "Templates/index.html";
+
     private const GET = "Get";
     private const POST = "Post";
 
@@ -31,9 +42,15 @@ class RouterRegister extends Controller
     private $currentMethod;
 
     /**
-     * URL path
+     * URL path pos [0[
      */
-    private $path;
+    private $pathArgument;
+
+
+    /**
+     * View argumenrt pos [1[
+     */
+    private $viewArgument;
 
     /**
      * It deploys all the GET Request Methods of the controllers
@@ -49,9 +66,10 @@ class RouterRegister extends Controller
             $props = $cr->getMethodProperties($method);
             $atrs = $props->getAttributes();
             foreach ($atrs as $att) {
-                // TODO: Count the "GET" attributess and proccess it dinamically
-                $this->path = $att->getArguments()[0];
-                $this->setView(count($att->getArguments()) === 2 ? $att->getArguments()[1] : "");
+                $totalArguments = count($att->getArguments());
+                $this->pathArgument = $totalArguments > 0 ? $att->getArguments()[0] : self::DEFAULT_PATH;
+                $this->viewArgument = $totalArguments > 1 ? $att->getArguments()[1] : self::DEFAULT_VIEW;
+                $this->setView($this->viewArgument);
                 $this->createGetEndpoints(
                     $att->getName(),
                     self::GET
@@ -59,7 +77,7 @@ class RouterRegister extends Controller
                 $this->createPostEndpoints(
                     $att->getName(),
                     self::POST,
-                    $this->path
+                    $this->pathArgument
                 );
             }
         }
@@ -72,7 +90,7 @@ class RouterRegister extends Controller
     private function createGetEndpoints($methodName, $req)
     {
         if (str_contains($methodName, $req)) {
-            Router::get($this->path, function (Request $request, Response $response) {
+            Router::get($this->pathArgument, function (Request $request, Response $response) {
                 // invoke an instance method
                 $instance = new $this->appClass();
                 $instanceMethod = $this->currentMethod;
@@ -91,11 +109,11 @@ class RouterRegister extends Controller
      */
     private function createPostEndpoints($methodName, $req, $path)
     {
-        $this->path = $path;
+        $this->pathArgument = $path;
         if (str_contains($methodName, $req)) {
             // TODO: Render or add view functionality
-            Router::post($this->path, function () {
-                echo "view::" . $this->path . "<br>";
+            Router::post($this->pathArgument, function () {
+                echo "view::" . $this->pathArgument . "<br>";
             });
         }
     }
