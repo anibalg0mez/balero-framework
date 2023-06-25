@@ -40,6 +40,16 @@ class Balero
     const PREVIOUS_FOLDER = "..";
 
     /**
+     * Sets attribute "GET" default path if not set
+     */
+    const DEFAULT_PATH = "/";
+
+    /**
+     * Swts attribute "GET" default view if not set
+     */
+    const DEFAULT_VIEW = "Templates/index.html";
+
+    /**
      * @return string App/Controllers folder root
      */
     public static function getControllersRoot(): string

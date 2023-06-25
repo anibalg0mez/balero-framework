@@ -14,19 +14,10 @@ use Framework\Reader\ClassReader;
 use Framework\Http\Request;
 use Framework\Http\Response;
 use Framework\Web\Controller;
+use Framework\Util\Balero;
 
 class RouterRegister extends Controller
 {
-
-    /**
-     * Swts default path if not set
-     */
-    private const DEFAULT_PATH = "/";
-
-    /**
-     * Swts default view if not set
-     */
-    private const DEFAULT_VIEW = "Templates/index.html";
 
     private const GET = "Get";
     private const POST = "Post";
@@ -67,8 +58,8 @@ class RouterRegister extends Controller
             $atrs = $props->getAttributes();
             foreach ($atrs as $att) {
                 $totalArguments = count($att->getArguments());
-                $this->pathArgument = $totalArguments > 0 ? $att->getArguments()[0] : self::DEFAULT_PATH;
-                $this->viewArgument = $totalArguments > 1 ? $att->getArguments()[1] : self::DEFAULT_VIEW;
+                $this->pathArgument = $totalArguments > 0 ? $att->getArguments()[0] : Balero::DEFAULT_PATH;
+                $this->viewArgument = $totalArguments > 1 ? $att->getArguments()[1] : Balero::DEFAULT_VIEW;
                 $this->setView($this->viewArgument);
                 $this->createGetEndpoints(
                     $att->getName(),
