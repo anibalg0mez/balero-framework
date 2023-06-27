@@ -31,6 +31,22 @@ class Router extends RouterRegister
         }
     }
 
+    /**
+     * @param $app_route string Path. Ex: /post/
+     * @param $httpMethod Request HTTP Method. Ex: GET, POST, ...
+     * @param $app_callback callback
+     */
+    public static function request($app_route, $httpMethod, $app_callback)
+    {
+        if (strcasecmp($_SERVER["REQUEST_METHOD"], $httpMethod) !== 0) {
+            return;
+        }
+        self::on($app_route, $app_callback);
+    }
+
+    /**
+     * @deprecated only as reference, delete it
+     */
     public static function get($app_route, $app_callback)
     {
         if (strcasecmp($_SERVER["REQUEST_METHOD"], "GET") !== 0) {
@@ -40,6 +56,9 @@ class Router extends RouterRegister
         self::on($app_route, $app_callback);
     }
 
+    /**
+     * @deprecated only as reference, delete it
+     */
     public static function post($app_route, $app_callback)
     {
         if (strcasecmp($_SERVER["REQUEST_METHOD"], "POST") !== 0) {
@@ -49,6 +68,11 @@ class Router extends RouterRegister
         self::on($app_route, $app_callback);
     }
 
+    /**
+     * Http Request Logic
+     * @param $exprr
+     * @param $call_back
+     */
     public static function on($exprr, $call_back)
     {
         $paramtrs = $_SERVER["REQUEST_URI"];

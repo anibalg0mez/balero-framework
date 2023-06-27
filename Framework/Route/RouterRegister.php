@@ -19,8 +19,8 @@ use Framework\Util\Balero;
 class RouterRegister extends Controller
 {
 
-    private const GET = "Get";
-    private const POST = "Post";
+    private const GET = "GET";
+    private const POST = "POST";
 
     /**
      * @var class name invoke class:class
@@ -61,51 +61,45 @@ class RouterRegister extends Controller
                 $this->pathArgument = $totalArguments > 0 ? $att->getArguments()[0] : Balero::DEFAULT_PATH;
                 $this->viewArgument = $totalArguments > 1 ? $att->getArguments()[1] : Balero::DEFAULT_VIEW;
                 $this->setView($this->viewArgument);
-                $this->createGetEndpoints(
-                    $att->getName(),
-                    self::GET
-                );
-                $this->createPostEndpoints(
-                    $att->getName(),
-                    self::POST,
-                    $this->pathArgument
+                $this->createEndpoint(
+                    $this->getAttributeName(strtoupper($att->getName()))
                 );
             }
         }
     }
 
     /**
-     * Validate and create HTTP GET Request Method
-     * Dinamically call the current method name on iteration
+     * Validate and create HTTP  Request Method
+     * Dinamically calls the current method name on iteration
      */
-    private function createGetEndpoints($methodName, $req)
+    private function createEndpoint($httpMethod)
     {
-        if (str_contains($methodName, $req)) {
-            Router::get($this->pathArgument, function (Request $request, Response $response) {
-                // invoke an instance method
-                $instance = new $this->appClass();
-                $instanceMethod = $this->currentMethod;
-                $response->toView(
-                    $this->render(
-                        $instance->$instanceMethod(),
-                        $this->getView()
-                    )
-                );
-            });
-        }
+        Router::request($this->pathArgument, $httpMethod, function (Request $request, Response $response) {
+            $instance = new $this->appClass();
+            $instanceMethod = $this->currentMethod;
+            $response->toView(
+                $this->render(
+                    $instance->$instanceMethod(),
+                    $this->getView()
+                )
+            );
+            // TODO: Add logic $response->toJson here
+        });
     }
 
     /**
-     * Validate and create HTTP POST Request Method
+     * @param $name
+     * @return string it returns the request name without namespace
      */
-    private function createPostEndpoints($methodName, $req, $path)
+    private function getAttributeName($name): string
     {
-        $this->pathArgument = $path;
-        if (str_contains($methodName, $req)) {
-            // TODO: Render or add view functionality
-            Router::post($this->pathArgument, function () {
-                echo "view::" . $this->pathArgument . "<br>";
-            });
+        if(str_contains($name, self::GET)) {
+            return self::GET;
         }
+        if(str_contains($name, self::POST)) {
+            return self::POST;
+        }
+        // TODO: Needed PUT, DELETE, UPDATE
     }
+
 }
